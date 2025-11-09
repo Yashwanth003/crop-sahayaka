@@ -1,73 +1,51 @@
-# Welcome to your Lovable project
+<div align="center">
+  <img src="public/hero-farm.jpg" alt="CropDiversify" width="600" />
+  <h1>CropDiversify</h1>
+  <p><strong>AI-powered crop recommendation platform for sustainable farming in Karnataka</strong></p>
+</div>
 
-## Project info
+---
 
-**URL**: https://lovable.dev/projects/fba12969-c33b-48f6-a921-833c25dea8a6
+## Overview
 
-## How can I edit this code?
+CropDiversify is an academic project built to help farmers in Karnataka make smarter, data-driven decisions about crop selection and farm management. The platform uses advanced machine learning (XGBoost) to analyze soil, climate, and market data, providing personalized crop recommendations that improve yield, profit, and soil health.
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- 🌾 AI-powered crop recommendations (English & Kannada)
+- 📊 Data-driven insights for soil, climate, and market conditions
+- 🔄 Crop rotation and diversification strategies
+- 🧑‍🌾 Farmer-friendly UI (React + Tailwind)
+- 🗣️ Language toggle: English ↔ Kannada (full UI and chatbot)
+- 🔒 Credentials protected: `.env` files are gitignored
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/fba12969-c33b-48f6-a921-833c25dea8a6) and start prompting.
+## Technology Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- Frontend: React, TypeScript, Vite, Tailwind CSS, shadcn-ui
+- Backend: FastAPI (Python), OpenAI-compatible API
+- ML: XGBoost, Pydantic models
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
+- Node.js & npm
+- Python 3.10+
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
+### Setup
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone https://github.com/Yashwanth003/crop-sahayaka.git
+cd crop-sahayaka-main
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install frontend dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start frontend dev server
 npm run dev
-```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/fba12969-c33b-48f6-a921-833c25dea8a6) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+# Backend setup
+cd backend
+python -m venv venv
+venv\Scripts\activate  # (Windows)
+pip install -r requirements.txt
+uvicorn main:app --reload
