@@ -71,14 +71,14 @@ export function Chatbot() {
           <ScrollArea className="flex-grow p-4">
             <div className="space-y-4">
               <div className="chat-bubble-bot">
-                Hello! How can I help you with your farming questions today?
+                {t('chat_welcome')}
               </div>
               {messages.map((msg, index) => (
                 <div key={index} className={msg.role === 'user' ? "chat-bubble-user" : "chat-bubble-bot"}>
                   {msg.content}
                 </div>
               ))}
-              {isLoading && <div className="chat-bubble-bot animate-pulse">Thinking...</div>}
+              {isLoading && <div className="chat-bubble-bot animate-pulse">{t('chat_thinking')}</div>}
             </div>
           </ScrollArea>
           

@@ -15,6 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     get_started: 'Get Started',
     chat_placeholder: 'Ask about crops, soil, pests...',
     chat_welcome: "Hello! How can I help you with your farming questions today?",
+    chat_thinking: 'Thinking...',
     run_analysis: 'Run AI Analysis',
     running_analysis: 'Running AI Analysis...',
     ready_for_analysis_title: 'Ready for Analysis',
@@ -207,7 +208,8 @@ const translations: Record<Language, Record<string, string>> = {
   kn: {
     get_started: 'ಆರಂಭಿಸಿ',
     chat_placeholder: 'ಬೆಳೆಗಳು, ಮಣ್ಣು, ಕೀಟಗಳ ಬಗ್ಗೆ ಪ್ರಶ್ನೆ ಮಾಡಿ...',
-    chat_welcome: 'ಹೇಲೋ! ನಿಮ್ಮ ಕೃಷಿ ಪ್ರಶ್ನೆಗಳಲ್ಲಿ 나는 ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?',
+    chat_welcome: 'ಹೇಲೋ! ನಿಮ್ಮ ಕೃಷಿ ಪ್ರಶ್ನೆಗಳಲ್ಲಿ ನಾನು ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?',
+    chat_thinking: 'ಆಲೋಚನೆಯಲ್ಲಿದೆ...',
     run_analysis: 'ಎಐ ವಿಶ್ಲೇಷಣೆ ರನ್ ಮಾಡಿ',
     running_analysis: 'ಎಐ ವಿಶ್ಲೇಷಣೆ ನಡೆಯುತ್ತಿದೆ...',
     ready_for_analysis_title: 'ವಿಶ್ಲેષಣೆಗೆ ಸಿದ್ಧವಾಗಿದೆ',

@@ -13,7 +13,9 @@ import {
   Brain,
   MapPin,
   Droplets,
-  Sprout
+  Sprout,
+  Apple,
+  Carrot
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -23,6 +25,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "
 // Define a type for the expected API response
 interface Recommendation {
   name: string;
+  category: 'Crop' | 'Vegetable' | 'Fruit';
   confidence: number;
   yield: string;
   profit: string;
@@ -310,35 +313,61 @@ const Dashboard = () => {
                 {/* Crop Recommendations */}
                 <Card className="shadow-natural">
                   <CardHeader>
-                    <CardTitle>Top Crop Recommendations</CardTitle>
+                    <CardTitle>Top Recommendations</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {results.recommendations.map((crop, index) => (
-                        <div key={index} className="border rounded-lg p-4 hover:shadow-sm transition-shadow">
-                          <div className="flex justify-between items-start mb-3">
-                            <h3 className="text-lg font-semibold">{crop.name}</h3>
-                            <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded-full">
-                              {crop.confidence}% Confidence
-                            </span>
+                      {results.recommendations.map((item, index) => {
+                        // Get icon based on category
+                        const getCategoryIcon = (category: string) => {
+                          switch(category) {
+                            case 'Vegetable': return <Carrot className="h-4 w-4" />;
+                            case 'Fruit': return <Apple className="h-4 w-4" />;
+                            default: return <Leaf className="h-4 w-4" />;
+                          }
+                        };
+
+                        // Get color based on category
+                        const getCategoryColor = (category: string) => {
+                          switch(category) {
+                            case 'Vegetable': return 'bg-green-100 text-green-700';
+                            case 'Fruit': return 'bg-red-100 text-red-700';
+                            default: return 'bg-yellow-100 text-yellow-700';
+                          }
+                        };
+
+                        return (
+                          <div key={index} className="border rounded-lg p-4 hover:shadow-sm transition-shadow">
+                            <div className="flex justify-between items-start mb-3">
+                              <div className="flex items-center gap-3 flex-1">
+                                <h3 className="text-lg font-semibold">{item.name}</h3>
+                                <span className={`text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 ${getCategoryColor(item.category)}`}>
+                                  {getCategoryIcon(item.category)}
+                                  {item.category}
+                                </span>
+                              </div>
+                              <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded-full">
+                                {item.confidence}% Confidence
+                              </span>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-3">
+                              <div>
+                                <div className="text-sm text-muted-foreground">Expected Yield</div>
+                                <div className="font-semibold">{item.yield}</div>
+                              </div>
+                              <div>
+                                <div className="text-sm text-muted-foreground">Estimated Profit</div>
+                                <div className="font-semibold text-accent">{item.profit}</div>
+                              </div>
+                              <div className="col-span-2 md:col-span-1">
+                                <div className="text-sm text-muted-foreground mb-1">Diversification Benefit</div>
+                                <Progress value={item.benefit} className="h-2" />
+                              </div>
+                            </div>
                           </div>
-                          
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-3">
-                            <div>
-                              <div className="text-sm text-muted-foreground">Expected Yield</div>
-                              <div className="font-semibold">{crop.yield}</div>
-                            </div>
-                            <div>
-                              <div className="text-sm text-muted-foreground">Estimated Profit</div>
-                              <div className="font-semibold text-accent">{crop.profit}</div>
-                            </div>
-                            <div className="col-span-2 md:col-span-1">
-                              <div className="text-sm text-muted-foreground mb-1">Diversification Benefit</div>
-                              <Progress value={crop.benefit} className="h-2" />
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </CardContent>
                 </Card>
