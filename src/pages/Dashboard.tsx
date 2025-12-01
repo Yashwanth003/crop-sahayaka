@@ -186,8 +186,8 @@ const Dashboard = () => {
 
                   <div>
                     <Label htmlFor="fertilizer" className="text-sm font-medium flex items-center gap-1">
-                      <Sprout className="h-4 w-4" />
-                      Fertilizer Use (kg/ha)
+                      <Droplets className="h-4 w-4" />
+                      Fertilizer Use (kg/acre)
                     </Label>
                     <Input
                       id="fertilizer"
@@ -202,7 +202,7 @@ const Dashboard = () => {
                   <div>
                     <Label htmlFor="pesticide" className="text-sm font-medium flex items-center gap-1">
                       <Shield className="h-4 w-4" />
-                      Pesticide Use (ltr/ha)
+                      Pesticide Use (ltr/acre)
                     </Label>
                     <Input
                       id="pesticide"

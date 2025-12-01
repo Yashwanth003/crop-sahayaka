@@ -76,8 +76,8 @@ def create_ai_prompt(data: CropRequest) -> str:
     - District: {data.district}
     - Season: {data.season}
     - Annual Rainfall: {data.rainfall} mm
-    - Fertilizer Use: {data.fertilizer} kg/ha
-    - Pesticide Use: {data.pesticide} ltr/ha
+    - Fertilizer Use: {data.fertilizer} kg/acre
+    - Pesticide Use: {data.pesticide} ltr/acre
 
     Provide a comprehensive crop diversification plan including:
     1. Major field crops (cereals, pulses, oilseeds)
@@ -85,6 +85,14 @@ def create_ai_prompt(data: CropRequest) -> str:
     3. Fruits (perennial and seasonal options)
     
     Generate realistic and contextually appropriate recommendations for the specified location.
+    
+    IMPORTANT: For estimating profits and yields:
+    1. You MUST refer to https://napanta.com/ for current Karnataka agricultural commodity prices
+    2. You MUST check https://agriplus.in/prices/all/karnataka for latest Karnataka crop prices
+    3. You MUST review https://krama.karnataka.gov.in/Home for government schemes and official pricing data
+    
+    Calculate profits based on current market rates from these websites. Do not use hypothetical or outdated prices.
+    Ensure all estimated profits reflect real-time market data from the specified sources.
     The JSON response must strictly adhere to the following structure, with no extra text or explanations:
     {{
       "metrics": {{
@@ -104,7 +112,7 @@ def create_ai_prompt(data: CropRequest) -> str:
           "name": "<Crop/Vegetable/Fruit Name 1>",
           "category": "<'Crop' | 'Vegetable' | 'Fruit'>",
           "confidence": <a prediction confidence percentage between 80 and 98>,
-          "yield": "<expected yield in t/ha or kg/ha>",
+          "yield": "<expected yield in kg/acre or tons/acre>",
           "profit": "<estimated profit in INR, e.g., '₹8,854'>",
           "benefit": <a diversification benefit score from 75 to 98>
         }},
@@ -112,7 +120,7 @@ def create_ai_prompt(data: CropRequest) -> str:
           "name": "<Crop/Vegetable/Fruit Name 2>",
           "category": "<'Crop' | 'Vegetable' | 'Fruit'>",
           "confidence": <a prediction confidence percentage between 75 and 95>,
-          "yield": "<expected yield in t/ha or kg/ha>",
+          "yield": "<expected yield in kg/acre or tons/acre>",
           "profit": "<estimated profit in INR>",
           "benefit": <a diversification benefit score from 70 to 95>
         }},
@@ -120,7 +128,7 @@ def create_ai_prompt(data: CropRequest) -> str:
           "name": "<Crop/Vegetable/Fruit Name 3>",
           "category": "<'Crop' | 'Vegetable' | 'Fruit'>",
           "confidence": <a prediction confidence percentage between 70 and 92>,
-          "yield": "<expected yield in t/ha or kg/ha>",
+          "yield": "<expected yield in kg/acre or tons/acre>",
           "profit": "<estimated profit in INR>",
           "benefit": <a diversification benefit score from 65 to 90>
         }},
@@ -128,7 +136,7 @@ def create_ai_prompt(data: CropRequest) -> str:
           "name": "<Crop/Vegetable/Fruit Name 4>",
           "category": "<'Crop' | 'Vegetable' | 'Fruit'>",
           "confidence": <a prediction confidence percentage between 68 and 90>,
-          "yield": "<expected yield in t/ha or kg/ha>",
+          "yield": "<expected yield in kg/acre or tons/acre>",
           "profit": "<estimated profit in INR>",
           "benefit": <a diversification benefit score from 60 to 88>
         }},
@@ -136,7 +144,7 @@ def create_ai_prompt(data: CropRequest) -> str:
           "name": "<Crop/Vegetable/Fruit Name 5>",
           "category": "<'Crop' | 'Vegetable' | 'Fruit'>",
           "confidence": <a prediction confidence percentage between 65 and 88>,
-          "yield": "<expected yield in t/ha or kg/ha>",
+          "yield": "<expected yield in kg/acre or tons/acre>",
           "profit": "<estimated profit in INR>",
           "benefit": <a diversification benefit score from 60 to 85>
         }},
@@ -144,7 +152,7 @@ def create_ai_prompt(data: CropRequest) -> str:
           "name": "<Additional Crop/Vegetable/Fruit Name 6>",
           "category": "<'Crop' | 'Vegetable' | 'Fruit'>",
           "confidence": <a prediction confidence percentage between 60 and 85>,
-          "yield": "<expected yield in t/ha or kg/ha>",
+          "yield": "<expected yield in kg/acre or tons/acre>",
           "profit": "<estimated profit in INR>",
           "benefit": <a diversification benefit score from 55 to 80>
         }}
@@ -171,6 +179,11 @@ async def get_crop_recommendations(request: CropRequest):
             "Your recommendations MUST include a mix of: (1) field crops (cereals, pulses, oilseeds), (2) vegetables (for nutrition and market income), and (3) fruits (perennial or seasonal varieties). "
             "You must analyze the user's input and return your analysis only in a valid, minified JSON format. Do not include any explanatory text, markdown formatting, or anything outside of the JSON object. "
             "Ensure each recommendation includes a 'category' field set to either 'Crop', 'Vegetable', or 'Fruit' based on the type of produce. "
+            "CRITICAL - For profit estimation, you MUST compulsorily refer to and use current market prices from these THREE websites:\n"
+            "1. https://napanta.com/ (for Karnataka agricultural commodity prices)\n"
+            "2. https://agriplus.in/prices/all/karnataka (for Karnataka-specific crop prices)\n"
+            "3. https://krama.karnataka.gov.in/Home (for government schemes and official price data)\n"
+            "Use the latest available prices from these sources to ensure accurate and realistic profit calculations. Always base estimated profits on actual market rates from these websites."
         )
     }
 
